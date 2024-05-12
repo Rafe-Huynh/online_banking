@@ -20,12 +20,12 @@ const MobileNav = ({ user }: MobileNavProps) => {
         <section className='w-full max-w-[264px]'>
             <Sheet>
                 <SheetTrigger>
-                    <Image src="/icons/hamburger.svg" width={30} height={30} className='cursor-pointer' />
+                    <Image src="/icons/hamburger.svg" width={30} height={30} className='cursor-pointer' alt="hamburger"/>
 
                 </SheetTrigger>
                 <SheetContent side='left' className='border-none bg-white'>
                     <Link href="/" className='cursor-pointer flex items-center gap-1 px-4'>
-                        <Image src='./icons/logo.svg' width={34} height={34} />
+                        <Image src='./icons/logo.svg' width={34} height={34} alt="logo" />
                         <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1'>Online Banking</h1>
                     </Link>
                     <div className='mobilenav-sheet'>
