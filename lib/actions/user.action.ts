@@ -23,11 +23,12 @@ export const signIn = async ({email, password}: signInProps) => {
         console.error('Error', error)
     }
 }
-export const signUp = async (userData: SignUpParams) => {
+// don't want to include the password so destructure the password then spread the userdata property 
+export const signUp = async ({password, ...userData}: SignUpParams) => {
     let newUserAccount;
     try {
         // create user account
-        const {email, password, firstName, lastName} = userData
+        const {email, firstName, lastName} = userData
         const { account, database } = await createAdminClient();
         newUserAccount = await account.create
         (ID.unique(), 
@@ -87,7 +88,7 @@ export const createLinkToken = async (user: User) =>{
             user: {
                 client_user_id: user.$id
             },
-            client_name: user.name,
+            client_name: `${user.firstName} ${user.lastName}`,
             products: ['auth'] as Products[],
             language: 'en',
             country_codes: ['US'] as CountryCode[],
