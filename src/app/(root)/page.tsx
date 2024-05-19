@@ -3,8 +3,14 @@ import HeaderBox from '@/components/HeaderBox'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
 import RightSideBar from '@/components/RightSideBar'
 import { getLoggedInUser } from '../../../lib/actions/user.action'
-const Home = async () => {
+import { getAccount, getAccounts } from '../../../lib/actions/bank.actions'
+const Home = async ({searchParams: {id, page}}:SearchParamProps) => {
   const loggedIn = await getLoggedInUser()
+  const accounts = await getAccounts({userId: loggedIn.$id})
+  if(!accounts) return;
+  const accountsData = accounts?.data
+  const appwriteItemId = (id as string ) || accounts?.data[0]?.appwriteItemId
+  const account = await getAccount({appwriteItemId})
   return (
     
     <section className='home'>
@@ -13,20 +19,20 @@ const Home = async () => {
             <HeaderBox 
             type = 'greeting'
             title ='Welcome'
-            user = {loggedIn?.name || 'Guest'}
+            user = {loggedIn?.firstName || 'Guest'}
             subtext = "Manage your account and transactions"
             />
           
           <TotalBalanceBox 
-          accounts = {[]}
-          totalBanks = {1}
-          totalCurrentBalance = {10000.00}
+          accounts = {accountsData}
+          totalBanks = {accounts?.totalBanks}
+          totalCurrentBalance = {accounts?.totalCurrentBalance}
           />
           </header>
           Recent transaction
          
         </div>
-        <RightSideBar user = {loggedIn} transactions={[]} banks={[{currentBalance: 123.23}, {currentBalance: 424.12}]}/>
+        <RightSideBar user = {loggedIn} transactions={accounts?.transactions} banks={accountsData?.slice(0,2)}/>
     </section>
   )
 }
