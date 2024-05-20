@@ -31,7 +31,7 @@ const RightSideBar = ({user, transactions, banks}: RightSidebarProps) => {
                     My Banks
                 </h2>
                 <Link href="/" className='flex gap-2'>
-                    <Image src="/icons/plugs.svg" width={20} height={20} alt="add" />
+                    <Image src="/icons/plus.svg" width={20} height={20} alt="add" />
                     <h2 className='text-14 font-semibold text-gray-600'>
                         Add Bank
                     </h2>
