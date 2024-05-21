@@ -4,6 +4,7 @@ Techs:
 Next.js, TypeScript, Appwrite, Plaid, Dwolla, React Hook Form, Zod, TailwindCSS, Chart.js, ShadCN
 
 Features:
+
 Authentication: An ultra-secure SSR authentication with proper validations and authorization
 
 Connect Banks: Integrates with Plaid for multiple bank account linking
