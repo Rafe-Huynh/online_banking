@@ -380,3 +380,10 @@
     @apply text-16 font-semibold text-black-2 max-xl:hidden;
   }
 }
+.image-container {
+  border: 2px solid black;
+  display: inline-block;
+  border-top-left-radius: 0.75rem/* 12px */;
+  border-bottom-left-radius: 0.75rem/* 12px */;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
