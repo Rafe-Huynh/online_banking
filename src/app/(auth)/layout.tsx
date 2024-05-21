@@ -1,4 +1,5 @@
 import Image from "next/image";
+import des from "../../../public/icons/des.png"
 export default function RootLayout({
     children,
   }: Readonly<{
@@ -9,7 +10,9 @@ export default function RootLayout({
           {children}
           <div className="auth-asset">
             <div>
-              <Image src="/icons/auth-image.svg" width={500} height={500} alt="auth image"/>
+            <Image src={des} alt="logo"  width={750}
+            height={1000}
+            className="rounded-l-xl object-contain"/>
             </div>
           </div>
       </main>

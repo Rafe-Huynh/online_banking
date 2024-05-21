@@ -207,3 +207,6 @@ export const authFormSchema = (type: string) => z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
+export const getImageUrl = (path: any) => {
+  return new URL(`/public/icons/${path}`, import.meta.url).href
+}
