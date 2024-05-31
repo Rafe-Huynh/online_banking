@@ -229,6 +229,7 @@ declare interface RecentTransactionsProps {
   transactions: Transaction[];
   appwriteItemId: string;
   page: number;
+  handleSearch: (results: Transaction[]) => void;
 }
 
 declare interface TransactionHistoryTableProps {
@@ -327,4 +328,12 @@ declare interface getBankProps {
 
 declare interface getBankByAccountIdProps {
   accountId: string;
+}
+declare interface searchBarProps{
+  transactions: Transaction[];
+  onSearch: (results: Transaction[]) => void;
+}
+declare interface handleSearchProps{
+  transactions: Transaction[];
+  onSearch: (results: Transaction[]) => void;
 }

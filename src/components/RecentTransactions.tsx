@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { receiveMessageOnPort } from 'worker_threads'
 import Link from 'next/link'
@@ -6,12 +7,23 @@ import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
 import { Pagination } from './Pagination'
+import SearchBar from './SearchBar'
+import Category from './Category'
+import { useState, useEffect } from 'react'
 const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page = 1 }: RecentTransactionsProps) => {
+    const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>(transactions);
+    const handleSearch = (results: Transaction[]) => {
+        setFilteredTransactions(results);
+      };
+      useEffect(() => {
+        setFilteredTransactions(transactions);
+      }, [transactions]);
     const rowsPerPage = 10;
     const totalPages = Math.ceil(transactions.length / rowsPerPage)
     const indexOfLastTransaction = page * rowsPerPage
     const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage
-    const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction)
+    const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction)
+    
     //appwriteItemId belongs to 1 specific id
     return (
         <section className='recent-transactions'>
@@ -22,8 +34,9 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
                 <Link href={`/transaction-history/?id=${appwriteItemId}`} className='view-all-btn'>
                     View all
                 </Link>
+                
             </header>
-
+            <SearchBar transactions={transactions} onSearch={handleSearch}/>
             <Tabs defaultValue={appwriteItemId} className="w-full">
 
                 <TabsList className='recent-transactions-tablist'>
